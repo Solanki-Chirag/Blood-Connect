@@ -35,7 +35,7 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function SignUp({ setLogin }) {
+export default function Hospital_forgot_password({ setLogin }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -61,90 +61,56 @@ export default function SignUp({ setLogin }) {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Edit password
           </Typography>
           <Box
             component="form"
-            noValidate
             onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
+            noValidate
+            sx={{ mt: 1 }}
           >
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="Hospital_name"
-                  required
-                  fullWidth
-                  id="Hospital_name"
-                  label="Hospital Name"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="Hospital_id"
-                  label="Hospital ID"
-                  name="Hospital_id"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="contact"
-                  label="Contact"
-                  name="contact"
-                  autoComplete="current-contact"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                />
-              </Grid>
-            </Grid>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="hospital_id"
+              label="Hospital ID:"
+              name="hospital_id"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="Hospital_name"
+              label="Hospital name:"
+              type="Hospital_name"
+              id="Hospital_name"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="Email"
+              label="Email"
+              type="Email"
+              id="Email"
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              Submit
             </Button>
-            <Grid container>
-              <Grid item>
-                <Link
-                  href="#"
-                  variant="body2"
-                  component="button"
-                  onClick={() => setLogin("login")}
-                >
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
+        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );

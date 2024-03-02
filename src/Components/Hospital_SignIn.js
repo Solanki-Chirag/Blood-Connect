@@ -35,7 +35,7 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function Hospital_SignIn() {
+export default function Hospital_SignIn({ setLogin }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -101,12 +101,22 @@ export default function Hospital_SignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link
+                  href="#"
+                  variant="body2"
+                  component="button"
+                  onClick={() => setLogin("forgotpassword")}
+                >
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link
+                  href="#"
+                  variant="body2"
+                  component="button"
+                  onClick={() => setLogin("signup")}
+                >
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
