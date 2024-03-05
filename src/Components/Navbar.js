@@ -21,6 +21,7 @@ export default function Header() {
                         >
                             Log In
                         </Link>
+                        
                     </div>
                     <div
                         className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
