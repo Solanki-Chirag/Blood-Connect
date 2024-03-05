@@ -1,26 +1,36 @@
+import React from "react";
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 
-import Hospital_SignIn from "./Components/Hospital_SignIn";
-import Hospital_SignUp from "./Components/Hospital_SignUp";
-import { useState } from "react";
-import Footer from "./Components/Footer";
-import Hospital_forgot_password from "./Components/Hospital_forgot_password";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  createRoutesFromElements,
+} from "react-router-dom";
 
+import About from "./Components/About";
+import Contact from "./Components/Contact";
+import Blogs from "./Components/Blogs";
+import Home from "./Components/Home";
+import DonerSignIn from "./Components/DonerSignIn";
+import OrganizeCamp from "./Components/OrganizeCamp";
 function App() {
-  const [login, setLogin] = useState("login");
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <>
+        <Route path="/" element={<Home />}>
+          <Route path="About" element={<About />}></Route>
+          <Route path="Contact" element={<Contact />}></Route>
+          <Route path="OrganizeCamp" element={<OrganizeCamp />}></Route>
+          <Route path="Blogs" element={<Blogs />}></Route>
+          <Route path="SignIn" element={<DonerSignIn />}></Route>
+        </Route>
+      </>
+    )
+  );
   return (
     <>
-      {/* <Navbar /> */}
-      {login === "login" ? (
-        <Hospital_SignIn setLogin={setLogin} />
-      ) : login === "signup" ? (
-        <Hospital_SignUp setLogin={setLogin} />
-      ) : (
-        <Hospital_forgot_password setLogin={setLogin} />
-      )}
-
-      <Footer />
+      <RouterProvider router={router} />
     </>
   );
 }
