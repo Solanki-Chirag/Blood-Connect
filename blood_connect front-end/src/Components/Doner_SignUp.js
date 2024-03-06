@@ -16,6 +16,9 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { useFormik } from "formik";
+import { SignUpSchema } from "../shemas";
+import Alert from "@mui/material/Alert";
 
 function Copyright(props) {
   return (
@@ -42,17 +45,25 @@ const defaultTheme = createTheme();
 export default function Doner_SignUp() {
   const [BloodGroup, setBloodGroup] = React.useState("");
 
-  const handleChange = (event) => {
+  const onhandleChange = (event) => {
     setBloodGroup(event.target.value);
   };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+  
   };
+  let initialValues = {
+    email: "",
+    password: "",
+  };
+
+  let { values, errors, handleBlur, handleChange, handleSubmit, touched } =
+    useFormik({
+      initialValues: initialValues,
+      validationSchema: SignUpSchema,
+      onSubmit: (value, action) => {
+        console.log(value);
+        action.resetForm();
+      },
+    });
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -88,7 +99,13 @@ export default function Doner_SignUp() {
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  value={values.firstname}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                {errors.firstName && touched.firstName ? (
+                  <Alert severity="error">{errors.firstName}</Alert>
+                ) : null}
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -98,7 +115,13 @@ export default function Doner_SignUp() {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  value={values.lastName}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                {errors.lastName && touched.lastName ? (
+                  <Alert severity="error">{errors.lastName}</Alert>
+                ) : null}
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -108,7 +131,13 @@ export default function Doner_SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                {errors.email && touched.email ? (
+                  <Alert severity="error">{errors.email}</Alert>
+                ) : null}
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -119,7 +148,13 @@ export default function Doner_SignUp() {
                   type="contact"
                   id="contact"
                   autoComplete="new-contact"
+                  value={values.contact}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                {errors.contact && touched.contact ? (
+                  <Alert severity="error">{errors.contact}</Alert>
+                ) : null}
               </Grid>
               <Grid item xs={12}>
                 <FormControl required sx={{ m: 1, minWidth: 400 }}>
@@ -131,7 +166,8 @@ export default function Doner_SignUp() {
                     id="demo-simple-select-required"
                     value={BloodGroup}
                     label="Blood Group *"
-                    onChange={handleChange}
+                    onChange={onhandleChange}
+                  onBlur={handleBlur}
                   >
                     <MenuItem value=""></MenuItem>
                     <MenuItem value="A+">A+</MenuItem>
