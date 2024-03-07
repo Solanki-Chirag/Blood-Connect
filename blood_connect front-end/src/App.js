@@ -1,36 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  createRoutesFromElements,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import About from "./Components/About";
 import Contact from "./Components/Contact";
 import Blogs from "./Components/Blogs";
 import Home from "./Components/Home";
-import DonerSignIn from "./Components/DonerSignIn";
+import DonorSignIn from "./Components/DonerSignIn";
+import Hospital_SignIn from "./Components/Hospital_SignIn";
 import OrganizeCamp from "./Components/OrganizeCamp";
+import ChooseUserType from "./Components/ChooseUserType";
+
 function App() {
-  const router = createBrowserRouter(
-    createRoutesFromElements(
-      <>
-        <Route path="/" element={<Home />}>
-          <Route path="About" element={<About />}></Route>
-          <Route path="Contact" element={<Contact />}></Route>
-          <Route path="OrganizeCamp" element={<OrganizeCamp />}></Route>
-          <Route path="Blogs" element={<Blogs />}></Route>
-          <Route path="SignIn" element={<DonerSignIn />}></Route>
-        </Route>
-      </>
-    )
-  );
+  const [user, setUser] = useState("");
   return (
     <>
-      <RouterProvider router={router} />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />}>
+            <Route path="About" element={<About />}></Route>
+            <Route path="Contact" element={<Contact />}></Route>
+            <Route path="OrganizeCamp" element={<OrganizeCamp />}></Route>
+            <Route path="Blogs" element={<Blogs />}></Route>
+            <Route
+              path="SignIn"
+              element={<ChooseUserType user={user} setUser={setUser} />}
+            ></Route>
+            <Route path="DonorSignIn" element={<DonorSignIn />}></Route>
+            <Route path="HospitalSignIn" element={<Hospital_SignIn />}></Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

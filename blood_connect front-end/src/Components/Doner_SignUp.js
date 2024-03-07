@@ -48,8 +48,7 @@ export default function Doner_SignUp() {
   const onhandleChange = (event) => {
     setBloodGroup(event.target.value);
   };
-  
-  };
+
   let initialValues = {
     email: "",
     password: "",
@@ -167,7 +166,7 @@ export default function Doner_SignUp() {
                     value={BloodGroup}
                     label="Blood Group *"
                     onChange={onhandleChange}
-                  onBlur={handleBlur}
+                    onBlur={handleBlur}
                   >
                     <MenuItem value=""></MenuItem>
                     <MenuItem value="A+">A+</MenuItem>
@@ -214,4 +213,4 @@ export default function Doner_SignUp() {
       </Container>
     </ThemeProvider>
   );
-}
+};
