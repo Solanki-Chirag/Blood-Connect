@@ -1,21 +1,34 @@
 import * as yup from "yup";
 
-const getCharacterValidationError = () => {
-    return `Your password must be 8 characters or more, needs at least one LowerCase,one UpperCase and one Symbol.`;
+const getPasswordValidationError = () => {
+    return "Your password must be 8 Passwords or more and contain at least one lowercase letter, one uppercase letter, and one symbol.";
 };
 
-export const SignInSchema = yup.object({
+
+
+const SignInSchema = yup.object().shape({
     email: yup.string().email().required("Please enter your email."),
-    password: yup
-        .string()
+    password: yup.string()
         .required("Please enter a password")
-        .min(8, getCharacterValidationError())
-        .matches(/[a-z]/, getCharacterValidationError())
-        .matches(/[A-Z]/, getCharacterValidationError())
-        .matches(/[^a-zA-Z0-9]/, getCharacterValidationError())
+        .min(8, getPasswordValidationError())
+        .matches(/[a-z]/, getPasswordValidationError())
+        .matches(/[A-Z]/, getPasswordValidationError())
+        .matches(/[^a-zA-Z0-9]/, getPasswordValidationError())
 });
 
-export const SignUpSchema = yup.object({
-  email: yup.string().email().required("Please enter your email."),
-  password: yup.string().min(4).required("Please enter your password."),
+const SignUpSchema = yup.object().shape({
+    firstname: yup.string().max(20).required("Please enter your firstname."),
+    lastname: yup.string().max(20).required("Please enter your lastname."),
+    email: yup.string().email().required("Please enter your email."),
+    contact: yup.string()
+        .matches(/^\+(?:[0-9] ?){6,14}[0-9]$/, "Invalid phone number")
+        .required("Please enter your phone number"),
+    password: yup.string()
+        .required("Please enter a password")
+        .min(8, getPasswordValidationError())
+        .matches(/[a-z]/, getPasswordValidationError())
+        .matches(/[A-Z]/, getPasswordValidationError())
+        .matches(/[^a-zA-Z0-9]/, getPasswordValidationError())
 });
+
+export { SignInSchema, SignUpSchema };

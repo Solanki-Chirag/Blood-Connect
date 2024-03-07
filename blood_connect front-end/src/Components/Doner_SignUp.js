@@ -49,10 +49,13 @@ export default function Doner_SignUp() {
     setBloodGroup(event.target.value);
   };
   
-  };
+  
   let initialValues = {
-    email: "",
-    password: "",
+    firstName:"",
+    lastName:"",
+    email:"",
+    contact:"",
+    password:""
   };
 
   let { values, errors, handleBlur, handleChange, handleSubmit, touched } =
@@ -89,8 +92,8 @@ export default function Doner_SignUp() {
             onSubmit={handleSubmit}
             sx={{ mt: 3 }}
           >
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+          <Grid container spacing={2}>
+          <Grid item xs={12}>
                 <TextField
                   autoComplete="given-name"
                   name="firstName"
@@ -107,7 +110,7 @@ export default function Doner_SignUp() {
                   <Alert severity="error">{errors.firstName}</Alert>
                 ) : null}
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} >
                 <TextField
                   required
                   fullWidth
@@ -190,7 +193,13 @@ export default function Doner_SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  value={values.password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                {errors.password && touched.password ? (
+                  <Alert severity="error">{errors.password}</Alert>
+                ) : null}
               </Grid>
             </Grid>
             <Button

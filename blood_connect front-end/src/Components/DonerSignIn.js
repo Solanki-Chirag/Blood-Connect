@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useFormik } from "formik";
 import { SignInSchema } from "../shemas";
 import Alert from "@mui/material/Alert";
+import { NavLink } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -120,9 +121,9 @@ export default function DonerSignIn() {
                   Forgot password?
                 </Link>
               </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+              <Grid item xs>
+                <Link href="/Doner_SignUp" className="body2">
+                  Don't have an account? Sign Up
                 </Link>
               </Grid>
             </Grid>
