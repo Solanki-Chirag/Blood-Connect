@@ -3,8 +3,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import { NavLink } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -12,6 +10,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useFormik } from "formik";
+import { HosSignUpSchema } from "../shemas";
+import Alert from "@mui/material/Alert";
 
 function Copyright(props) {
   return (
@@ -36,14 +37,26 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+ 
+
+  let initialValues = {
+    Hospital_name:"",
+    Hospital_id:"",
+    email:"",
+    contact:"",
+    password:""
   };
+
+  let { values, errors, handleBlur, handleChange, handleSubmit, touched } =
+      useFormik({
+      initialValues: initialValues,
+      validationSchema: HosSignUpSchema,
+      onSubmit: (value, action) => {
+        console.log(value);
+        action.resetForm();
+      },
+    });
+    
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -70,7 +83,7 @@ export default function SignUp() {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} >
                 <TextField
                   autoComplete="given-name"
                   name="Hospital_name"
@@ -78,17 +91,28 @@ export default function SignUp() {
                   fullWidth
                   id="Hospital_name"
                   label="Hospital Name"
-                  autoFocus
+                  value={values.Hospital_name}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                {errors.Hospital_name && touched.Hospital_name ? (
+                  <Alert severity="error">{errors.Hospital_name}</Alert>
+                ) : null}
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} >
                 <TextField
                   required
                   fullWidth
                   id="Hospital_id"
                   label="Hospital ID"
                   name="Hospital_id"
+                  value={values.Hospital_id}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                {errors.Hospital_id && touched.Hospital_id ? (
+                  <Alert severity="error">{errors.Hospital_id}</Alert>
+                ) : null}
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -98,7 +122,13 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                {errors.email && touched.email ? (
+                  <Alert severity="error">{errors.email}</Alert>
+                ) : null}
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -108,7 +138,13 @@ export default function SignUp() {
                   label="Contact"
                   name="contact"
                   autoComplete="current-contact"
+                  value={values.contact}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                {errors.contact && touched.contact ? (
+                  <Alert severity="error">{errors.contact}</Alert>
+                ) : null}
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -119,7 +155,13 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  value={values.password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                {errors.password && touched.password ? (
+                  <Alert severity="error">{errors.password}</Alert>
+                ) : null}
               </Grid>
             </Grid>
             <Button

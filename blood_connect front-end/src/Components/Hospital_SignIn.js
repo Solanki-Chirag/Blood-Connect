@@ -12,6 +12,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useFormik } from "formik";
+import { HosSignInSchema } from "../shemas";
+import Alert from "@mui/material/Alert";
 
 function Copyright(props) {
   return (
@@ -36,14 +39,22 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function Hospital_SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+  
+    let initialValues = {
+      Hospital_id: "",
+      password: "",
+    };
+  
+    let { values, errors, handleBlur, handleChange, handleSubmit, touched } =
+      useFormik({
+        initialValues: initialValues,
+        validationSchema: HosSignInSchema,
+        onSubmit: (value, action) => {
+          console.log(value);
+          action.resetForm();
+        },
+      });
+  
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -73,11 +84,17 @@ export default function Hospital_SignIn() {
               margin="normal"
               required
               fullWidth
-              id="hospital_id"
+              id="Hospital_id"
               label="Hospital ID:"
-              name="hospital_id"
-              autoFocus
+              name="Hospital_id"
+              value={values.Hospital_id}
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
+            {errors.Hospital_id && touched.Hospital_id ? (
+              <Alert severity="error">{errors.Hospital_id}</Alert>
+            ) : null}
+
             <TextField
               margin="normal"
               required
@@ -86,7 +103,13 @@ export default function Hospital_SignIn() {
               label="Password"
               type="password"
               id="password"
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
+            {errors.password && touched.password ? (
+              <Alert severity="error">{errors.password}</Alert>
+            ) : null}
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
