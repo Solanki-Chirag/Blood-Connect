@@ -19,6 +19,7 @@ app.get("/", (req, res) => {
   res.send("hello world");
 });
 app.use("/registerHospital", require("./routes/registerHospital"));
+app.use("/authHospital", require("./routes/authHospital"));
 
 mongoose.connection.once("open", () => {
   console.log("connected to mongodb");

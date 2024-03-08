@@ -45,21 +45,45 @@ export default function DonorSignUp() {
 
   const onhandleChange = (event) => {
     setBloodGroup(event.target.value);
-    
   };
-  
-  
+
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = {
+      username: e.target.username.value,
+      password: e.target.password.value,
+    };
+
+    try {
+      const response = await fetch('http://localhost:3001/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      // Handle the response data as needed.
+      console.log(data);
+    } catch (error) {
+      console.error('Error submitting the form:', error);
+    }
+  };
+
   let initialValues = {
-    firstName:"",
-    lastName:"",
-    email:"",
-    contact:"",
-    bloodGroup:"",
-    password:""
+    firstName: "",
+    lastName: "",
+    email: "",
+    contact: "",
+    bloodGroup: "",
+    password: "",
   };
 
   let { values, errors, handleBlur, handleChange, handleSubmit, touched } =
-      useFormik({
+    useFormik({
       initialValues: initialValues,
       validationSchema: SignUpSchema,
       onSubmit: (value, action) => {
@@ -67,10 +91,10 @@ export default function DonorSignUp() {
         action.resetForm();
       },
     });
-    const handleSelectChange = (event) => {
-      onhandleChange(event);
-      handleChange(event);
-    };
+  const handleSelectChange = (event) => {
+    onhandleChange(event);
+    handleChange(event);
+  };
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -96,8 +120,8 @@ export default function DonorSignUp() {
             onSubmit={handleSubmit}
             sx={{ mt: 3 }}
           >
-          <Grid container spacing={2}>
-          <Grid item xs={12}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
                 <TextField
                   autoComplete="given-name"
                   name="firstName"
@@ -105,7 +129,6 @@ export default function DonorSignUp() {
                   fullWidth
                   id="firstName"
                   label="First Name"
-                  
                   value={values.firstName}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -114,7 +137,7 @@ export default function DonorSignUp() {
                   <Alert severity="error">{errors.firstName}</Alert>
                 ) : null}
               </Grid>
-              <Grid item xs={12} >
+              <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
@@ -212,6 +235,7 @@ export default function DonorSignUp() {
             </Grid>
             <Button
               type="submit"
+              onClick={handleOnSubmit}
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
@@ -220,7 +244,15 @@ export default function DonorSignUp() {
             </Button>
             <Grid container justifyContent="flex">
               <Grid item>
-                <NavLink to={"/DonorSignIn"} variant="body2"  style={{ color: '#2196f3', textDecoration: "underline", fontSize:"14px"}}>
+                <NavLink
+                  to={"/DonorSignIn"}
+                  variant="body2"
+                  style={{
+                    color: "#2196f3",
+                    textDecoration: "underline",
+                    fontSize: "14px",
+                  }}
+                >
                   Already have an account? Sign in
                 </NavLink>
               </Grid>
@@ -231,4 +263,4 @@ export default function DonorSignUp() {
       </Container>
     </ThemeProvider>
   );
-};
+}

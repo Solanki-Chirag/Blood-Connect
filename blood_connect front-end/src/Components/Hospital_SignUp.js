@@ -37,18 +37,38 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignUp() {
- 
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
+    console.log(values);
+
+    try {
+      const response = await fetch("http://localhost:3500/registerHospital", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      const data = await response.json();
+
+      // Handle the response data as needed.
+      console.log(data);
+    } catch (error) {
+      console.error("Error submitting the form:", error);
+    }
+  };
 
   let initialValues = {
-    Hospital_name:"",
-    Hospital_id:"",
-    email:"",
-    contact:"",
-    password:""
+    Hospital_name: "",
+    Hospital_id: "",
+    email: "",
+    contact: "",
+    password: "",
   };
 
   let { values, errors, handleBlur, handleChange, handleSubmit, touched } =
-      useFormik({
+    useFormik({
       initialValues: initialValues,
       validationSchema: HosSignUpSchema,
       onSubmit: (value, action) => {
@@ -56,7 +76,6 @@ export default function SignUp() {
         action.resetForm();
       },
     });
-    
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -83,7 +102,7 @@ export default function SignUp() {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12} >
+              <Grid item xs={12}>
                 <TextField
                   autoComplete="given-name"
                   name="Hospital_name"
@@ -99,7 +118,7 @@ export default function SignUp() {
                   <Alert severity="error">{errors.Hospital_name}</Alert>
                 ) : null}
               </Grid>
-              <Grid item xs={12} >
+              <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
@@ -166,6 +185,7 @@ export default function SignUp() {
             </Grid>
             <Button
               type="submit"
+              onClick={handleOnSubmit}
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
@@ -178,7 +198,11 @@ export default function SignUp() {
                   to={"/Hospital_SignIn"}
                   variant="body2"
                   component="button"
-                  style={{ color: '#2196f3', textDecoration: "underline",fontSize:"14px" }}
+                  style={{
+                    color: "#2196f3",
+                    textDecoration: "underline",
+                    fontSize: "14px",
+                  }}
                 >
                   Already have an account? Sign in
                 </NavLink>

@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const hospitalSchema = new Schema({
-  hospital_name: {
+  Hospital_name: {
     type: String,
     required: true,
   },
-  hospital_id: {
+  Hospital_id: {
     type: String,
     required: true,
   },
@@ -22,6 +22,7 @@ const hospitalSchema = new Schema({
     type: String,
     required: true,
   },
+  refreshToken: String,
 });
 
 module.exports = mongoose.model("hospital", hospitalSchema);
