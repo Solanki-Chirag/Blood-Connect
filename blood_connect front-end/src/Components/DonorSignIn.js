@@ -5,7 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -15,7 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useFormik } from "formik";
 import { SignInSchema } from "../shemas";
 import Alert from "@mui/material/Alert";
-import { NavLink } from "react-router-dom";
+import { NavLink,Link } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -26,9 +26,9 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="/">
+      <NavLink color="inherit" to={"/"}>
         Blood Connect
-      </Link>{" "}
+      </NavLink>{" "}
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -39,7 +39,7 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function DonerSignIn() {
+export default function DonorSignIn() {
   let initialValues = {
     email: "",
     password: "",
@@ -80,7 +80,7 @@ export default function DonerSignIn() {
               id="email"
               label="Email Address"
               name="email"
-              autoFocus
+             
               value={values.name}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -117,14 +117,14 @@ export default function DonerSignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <NavLink to={"#"} variant="body2"  style={{ color: '#2196f3', textDecoration: "underline",fontSize:"14px" }}>
                   Forgot password?
-                </Link>
+                </NavLink>
               </Grid>
               <Grid item xs>
-                <Link href="/Doner_SignUp" className="body2">
+                <NavLink to={"/DonorSignUp"} className="body2"  style={{ color: '#2196f3', textDecoration: "underline",fontSize:"14px" }}>
                   Don't have an account? Sign Up
-                </Link>
+                </NavLink>
               </Grid>
             </Grid>
           </Box>

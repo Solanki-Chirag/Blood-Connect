@@ -5,7 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+import { NavLink } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -22,9 +22,9 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
+      <NavLink color="inherit" to={"/"}>
         BloodConnect
-      </Link>{" "}
+      </NavLink>{" "}
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -35,7 +35,7 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function SignUp({ setLogin }) {
+export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -132,14 +132,14 @@ export default function SignUp({ setLogin }) {
             </Button>
             <Grid container>
               <Grid item>
-                <Link
-                  href="#"
+                <NavLink
+                  to={"/Hospital_SignIn"}
                   variant="body2"
                   component="button"
-                  onClick={() => setLogin("login")}
+                  style={{ color: '#2196f3', textDecoration: "underline",fontSize:"14px" }}
                 >
                   Already have an account? Sign in
-                </Link>
+                </NavLink>
               </Grid>
             </Grid>
           </Box>

@@ -5,7 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+import { NavLink } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -22,9 +22,9 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
+      <NavLink color="inherit" to={"/"}>
         BloodConnect
-      </Link>{" "}
+      </NavLink>{" "}
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -35,7 +35,7 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function Hospital_SignIn({ setLogin }) {
+export default function Hospital_SignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -101,24 +101,24 @@ export default function Hospital_SignIn({ setLogin }) {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link
-                  href="#"
+                <NavLink
+                  to={"/Hospital_forgot_password"}
                   variant="body2"
                   component="button"
-                  onClick={() => setLogin("forgotpassword")}
+                  style={{ color: '#2196f3', textDecoration: "underline",fontSize:"14px" }}
                 >
                   Forgot password?
-                </Link>
+                </NavLink>
               </Grid>
               <Grid item>
-                <Link
-                  href="#"
+                <NavLink
+                  to={"/Hospital_SignUp"}
                   variant="body2"
                   component="button"
-                  onClick={() => setLogin("signup")}
+                  style={{ color: '#2196f3', textDecoration: "underline",fontSize:"14px" }}
                 >
-                  {"Don't have an account? Sign Up"}
-                </Link>
+                  Don't have an account? Sign Up
+                </NavLink>
               </Grid>
             </Grid>
           </Box>

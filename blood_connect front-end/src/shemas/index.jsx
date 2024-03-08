@@ -7,7 +7,7 @@ const getPasswordValidationError = () => {
 
 
 const SignInSchema = yup.object().shape({
-    email: yup.string().email().required("Please enter your email."),
+    email: yup.string().matches(/^[a-zA-Z0-9._%+-]+@gmail\.com$/,"Enter valid email.").required("Please enter your email."),
     password: yup.string()
         .required("Please enter a password")
         .min(8, getPasswordValidationError())
@@ -17,12 +17,13 @@ const SignInSchema = yup.object().shape({
 });
 
 const SignUpSchema = yup.object().shape({
-    firstname: yup.string().max(20).required("Please enter your firstname."),
-    lastname: yup.string().max(20).required("Please enter your lastname."),
-    email: yup.string().email().required("Please enter your email."),
+    firstName: yup.string().max(20).required("Please enter your firstname."),
+    lastName: yup.string().max(20).required("Please enter your lastname."),
+    email: yup.string().matches(/^[a-zA-Z0-9._%+-]+@gmail\.com$/,"Enter valid email.").required("Please enter your email."),
     contact: yup.string()
-        .matches(/^\+(?:[0-9] ?){6,14}[0-9]$/, "Invalid phone number")
+        .matches(/^\d{10}$/, "Invalid phone number")
         .required("Please enter your phone number"),
+    bloodGroup: yup.string().required("Select BloodGroup."),
     password: yup.string()
         .required("Please enter a password")
         .min(8, getPasswordValidationError())
