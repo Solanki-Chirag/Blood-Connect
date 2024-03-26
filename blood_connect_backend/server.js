@@ -21,6 +21,8 @@ app.get("/", (req, res) => {
 app.use("/registerHospital", require("./routes/registerHospital"));
 app.use("/authHospital", require("./routes/authHospital"));
 
+app.use("/registerDoner", require("./routes/registerDoner"));  
+
 mongoose.connection.once("open", () => {
   console.log("connected to mongodb");
   app.listen(PORT, () => {

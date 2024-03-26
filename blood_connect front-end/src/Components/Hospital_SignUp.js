@@ -37,27 +37,7 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignUp() {
-  const handleOnSubmit = async (e) => {
-    e.preventDefault();
-    console.log(values);
-
-    try {
-      const response = await fetch("http://localhost:3500/registerHospital", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
-
-      const data = await response.json();
-
-      // Handle the response data as needed.
-      console.log(data);
-    } catch (error) {
-      console.error("Error submitting the form:", error);
-    }
-  };
+  
 
   let initialValues = {
     Hospital_name: "",
@@ -71,9 +51,25 @@ export default function SignUp() {
     useFormik({
       initialValues: initialValues,
       validationSchema: HosSignUpSchema,
-      onSubmit: (value, action) => {
+      onSubmit: async (value, action) => {
         console.log(value);
         action.resetForm();
+        try {
+          const response = await fetch("http://localhost:3500/registerHospital", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(values),
+          });
+    
+          const data = await response.json();
+    
+          // Handle the response data as needed.
+          console.log(data);
+        } catch (error) {
+          console.error("Error submitting the form:", error);
+        }
       },
     });
 
@@ -185,7 +181,6 @@ export default function SignUp() {
             </Grid>
             <Button
               type="submit"
-              onClick={handleOnSubmit}
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}

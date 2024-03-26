@@ -47,31 +47,7 @@ export default function DonorSignUp() {
     setBloodGroup(event.target.value);
   };
 
-  const handleOnSubmit = async (e) => {
-    e.preventDefault();
-
-    const formData = {
-      username: e.target.username.value,
-      password: e.target.password.value,
-    };
-
-    try {
-      const response = await fetch('http://localhost:3001/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      // Handle the response data as needed.
-      console.log(data);
-    } catch (error) {
-      console.error('Error submitting the form:', error);
-    }
-  };
+  
 
   let initialValues = {
     firstName: "",
@@ -86,9 +62,26 @@ export default function DonorSignUp() {
     useFormik({
       initialValues: initialValues,
       validationSchema: SignUpSchema,
-      onSubmit: (value, action) => {
+      onSubmit: async (value, action) => {
         console.log(value);
         action.resetForm();
+        setBloodGroup('');
+        try {
+          const response = await fetch("http://localhost:3500/registerDoner", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(values),
+          });
+    
+          const data = await response.json();
+    
+          // Handle the response data as needed.
+          console.log(data);
+        } catch (error) {
+          console.error("Error submitting the form:", error);
+        }
       },
     });
   const handleSelectChange = (event) => {
@@ -235,7 +228,6 @@ export default function DonorSignUp() {
             </Grid>
             <Button
               type="submit"
-              onClick={handleOnSubmit}
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
