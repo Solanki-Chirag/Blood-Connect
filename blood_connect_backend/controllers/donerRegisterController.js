@@ -1,9 +1,14 @@
 const doner = require("../model/Doner");
 const bcrypt = require("bcryptjs");
 
+
 const handleNewDoner = async (req, res) => {
-  const { firstName,lastName, email, contact,bloodGroup, password } = req.body;
-  if (!firstName || !lastName  || !email || !contact || !bloodGroup || !password)
+
+ 
+  const { firstName,lastName, email, contact,bloodGroup,file, password } = req.body;
+  const bgfile=req.file.filename;
+  console.log("filename",bgfile);
+  if (!firstName || !lastName  || !email || !contact || !bloodGroup  || !password)
     return res.status(400).json({ message: "All fields are required" });
 
   // check for duplicate usernames in the db
@@ -21,7 +26,10 @@ const handleNewDoner = async (req, res) => {
       email: email,
       contact: contact,
       bloodGroup:bloodGroup,
+      file:file,
       password: hashedPwd,
+      file:bgfile
+      
     });
 
     console.log(result);
