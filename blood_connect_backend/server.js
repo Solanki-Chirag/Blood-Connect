@@ -4,13 +4,22 @@ const app = express();
 const cors = require("cors");
 const corsOptions = require("./config/corsOptions");
 const mongoose = require("mongoose");
-
+const verifyJWT = require('./middleware/verifyJwt');
+const donerVerifyJWT = require('./middleware/donerVerifyJwt');
+const cookieParser = require('cookie-parser');
+const credentials = require('./middleware/credentials');
 const connectDB = require("./config/dbConn");
 PORT = 3500;
 
 connectDB();
 
 app.set("view engine", "ejs");
+// // custom middleware logger
+// app.use(logger);
+
+// // Handle options credentials check - before CORS!
+// // and fetch cookies credentials requirement
+ app.use(credentials);
 
 app.use(cors(corsOptions));
 
@@ -20,7 +29,8 @@ app.get("/", (req, res) => {
   res.send("hello world");
 });
 app.use("/registerHospital",  require("./routes/registerHospital"));
-app.use("/authHospital", require("./routes/authHospital"));
+app.use("/Hospital_SignIn", require("./routes/authHospital"));
+app.use("/Doner_SignIn", require("./routes/authDoner"));
 
 app.use("/registerDoner", require("./routes/registerDoner"));
 

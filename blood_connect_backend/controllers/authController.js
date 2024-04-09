@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 
 const handleHospitalLogin = async (req, res) => {
   const { Hospital_id, password } = req.body;
+  console.log("back",req.body);
   if (!Hospital_id || !password)
     return res.status(400).json("Hospital id and password required!!");
 
@@ -20,7 +21,7 @@ const handleHospitalLogin = async (req, res) => {
         Hospital_name: hospital_name,
       },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "30s" }
+      { expiresIn: "60s" }
     );
 
     const refreshToken = jwt.sign(
@@ -37,6 +38,7 @@ const handleHospitalLogin = async (req, res) => {
 
     res.cookie("jwt", refreshToken, {
       httpOnly: true,
+      sameSite: 'None', 
       maxAge: 24 * 60 * 60 * 1000,
     });
 
