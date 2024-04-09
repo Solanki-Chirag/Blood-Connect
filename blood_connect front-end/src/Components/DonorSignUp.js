@@ -29,25 +29,25 @@ function Copyright(props) {
       {"Copyright © "}
       <NavLink color="inherit" to={"/"}>
         Blood Connect
-      </NavLink>{" "}
+      </NavLink>
       {new Date().getFullYear()}
       {"."}
     </Typography>
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
 
 export default function DonorSignUp() {
   const [BloodGroup, setBloodGroup] = React.useState("");
+  const [file, setfile] = React.useState("");
 
+  const onhandleFileChange = (event) => {
+    setfile(event.target.files[0]);
+  };
   const onhandleChange = (event) => {
     setBloodGroup(event.target.value);
   };
-
-  
 
   let initialValues = {
     firstName: "",
@@ -63,20 +63,28 @@ export default function DonorSignUp() {
       initialValues: initialValues,
       validationSchema: SignUpSchema,
       onSubmit: async (value, action) => {
-        console.log(value);
+        console.log("values", values);
         action.resetForm();
-        setBloodGroup('');
+        setBloodGroup("");
+
+        const formData = new FormData();
+        formData.append("firstName", values.firstName);
+        formData.append("lastName", values.lastName);
+        formData.append("email", values.email);
+        formData.append("contact", values.contact);
+        formData.append("bloodGroup", values.bloodGroup);
+        formData.append("password", values.password);
+        formData.append("file", file);
+
         try {
           const response = await fetch("http://localhost:3500/registerDoner", {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(values),
+
+            body: formData,
           });
-    
+
           const data = await response.json();
-    
+
           // Handle the response data as needed.
           console.log(data);
         } catch (error) {
@@ -84,6 +92,7 @@ export default function DonorSignUp() {
         }
       },
     });
+
   const handleSelectChange = (event) => {
     onhandleChange(event);
     handleChange(event);
@@ -111,6 +120,7 @@ export default function DonorSignUp() {
             component="form"
             noValidate
             onSubmit={handleSubmit}
+            encType="multipart/form-data"
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
@@ -180,7 +190,7 @@ export default function DonorSignUp() {
                 ) : null}
               </Grid>
               <Grid item xs={12}>
-                <FormControl required sx={{ m: 1, minWidth: 400 }}>
+                <FormControl required fullWidth>
                   <InputLabel id="demo-simple-select-required-label">
                     BloodGroup
                   </InputLabel>
@@ -189,7 +199,7 @@ export default function DonorSignUp() {
                     id="demo-simple-select-required"
                     value={BloodGroup}
                     name="bloodGroup"
-                    label="Blood Group *"
+                    label="Blood Group"
                     onChange={handleSelectChange}
                     onBlur={handleBlur}
                   >
@@ -208,6 +218,24 @@ export default function DonorSignUp() {
                   <Alert severity="error">{errors.bloodGroup}</Alert>
                 ) : null}
               </Grid>
+              <Grid item xs={12}>
+                <FormControl fullWidth required>
+                  <label
+                    htmlFor="file_input"
+                    className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-600 focus:outline-none dark:bg-white-700 dark:border-gray-400 dark:placeholder-gray-600 py-4 px-3 leading-tight focus:border-blue-500 focus:bg-white"
+                  >
+                    {file!==""?file.name:"Upload BloodGroup Certificate *"}
+                  </label>
+                  <input
+                    id="file_input"
+                    type="file"
+                    accept="application/pdf"
+                    onChange={onhandleFileChange}
+                    className="sr-only" // This class visually hides the original input
+                  />
+                </FormControl>
+              </Grid>
+
               <Grid item xs={12}>
                 <TextField
                   required
