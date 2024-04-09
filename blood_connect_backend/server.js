@@ -9,6 +9,8 @@ PORT = 3500;
 
 connectDB();
 
+app.set("view engine", "ejs");
+
 app.use(cors(corsOptions));
 
 app.use(express.urlencoded({ extended: false }));
@@ -21,7 +23,11 @@ app.get("/", (req, res) => {
 app.use("/registerHospital", require("./routes/registerHospital"));
 app.use("/authHospital", require("./routes/authHospital"));
 
-app.use("/registerDoner", require("./routes/registerDoner"));  
+app.use("/registerDoner", require("./routes/registerDoner"));
+
+app.use("/forgot-password", require("./routes/Donorforgotpassword"));
+
+app.use("/reset-password", require("./routes/DonorResetPassword"));
 
 mongoose.connection.once("open", () => {
   console.log("connected to mongodb");
