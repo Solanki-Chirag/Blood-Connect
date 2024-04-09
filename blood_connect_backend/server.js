@@ -13,12 +13,6 @@ PORT = 3500;
 
 connectDB();
 
-// // custom middleware logger
-// app.use(logger);
-
-// // Handle options credentials check - before CORS!
-// // and fetch cookies credentials requirement
- app.use(credentials);
 
 app.use(cors(corsOptions));
 
@@ -36,15 +30,14 @@ app.use("/registerHospital",  require("./routes/registerHospital"));
 app.use("/Hospital_SignIn", require("./routes/authHospital"));
 app.use("/Doner_SignIn", require("./routes/authDoner"));
 
+<<<<<<< HEAD
+app.use("/registerDoner", require("./routes/registerDoner"));
+
+app.use("/forgot-password", require("./routes/Donorforgotpassword"));
+
+app.use("/reset-password", require("./routes/DonorResetPassword"));
+=======
 app.use("/registerDoner",require("./routes/registerDoner"));  
-
-app.use('/refresh', require('./routes/refresh'));
-app.use('/donerRefresh', require('./routes/donerRefresh'));
-app.use('/donerLogout', require('./routes/donerLogout'));
-
-app.use(verifyJWT);
-app.use(donerVerifyJWT);
-
 
 mongoose.connection.once("open", () => {
   console.log("connected to mongodb");
