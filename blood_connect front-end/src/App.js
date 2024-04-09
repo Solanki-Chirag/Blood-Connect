@@ -11,15 +11,17 @@ import DonorSignIn from "./Components/DonorSignIn";
 import DonorSignUp from "./Components/DonorSignUp";
 import Hospital_SignIn from "./Components/Hospital_SignIn";
 import Hospital_SignUp from "./Components/Hospital_SignUp";
+
 import Hospital_forgot_password from "./Components/Hospital_forgot_password";
 import OrganizeCamp from "./Components/OrganizeCamp";
 import ChooseUserType from "./Components/ChooseUserType";
+import HospitalDashboard from "./Components/HospitalDashboard";
 
 function App() {
   const [user, setUser] = useState("");
   return (
     <>
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />}>
             <Route path="About" element={<About />}></Route>
@@ -35,9 +37,12 @@ function App() {
             <Route path="Hospital_SignIn" element={<Hospital_SignIn />}></Route>
             <Route path="Hospital_SignUp" element={<Hospital_SignUp />}></Route>
             <Route path="Hospital_forgot_password" element={<Hospital_forgot_password />}></Route>
+            
           </Route>
+          <Route path="hospitalDashboard" element={<hospitalDashboard />}></Route>
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter> */}
+      <HospitalDashboard/>
     </>
   );
 }

@@ -16,11 +16,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.4.0",
     "mongoose": "^8.2.0",
-<<<<<<< HEAD
-    "nodemailer": "^6.9.13",
-=======
     "multer": "^1.4.5-lts.1",
->>>>>>> 5bef626a1b644845c5dc3bce3ba02e3cc5e6bfff
+    "nodemailer": "^6.9.13",
     "nodemon": "^3.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
