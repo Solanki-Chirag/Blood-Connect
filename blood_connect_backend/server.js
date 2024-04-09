@@ -4,26 +4,47 @@ const app = express();
 const cors = require("cors");
 const corsOptions = require("./config/corsOptions");
 const mongoose = require("mongoose");
-
+const verifyJWT = require('./middleware/verifyJwt');
+const donerVerifyJWT = require('./middleware/donerVerifyJwt');
+const cookieParser = require('cookie-parser');
+const credentials = require('./middleware/credentials');
 const connectDB = require("./config/dbConn");
 PORT = 3500;
 
 connectDB();
 
+// // custom middleware logger
+// app.use(logger);
+
+// // Handle options credentials check - before CORS!
+// // and fetch cookies credentials requirement
+ app.use(credentials);
 
 app.use(cors(corsOptions));
 
 
 
 app.use(express.json());
-//app.use(express.urlencoded({extended:false}));
+app.use(express.urlencoded({extended:false}));
+//middleware for cookies
+app.use(cookieParser());
+
 app.get("/", (req, res) => {
   res.send("hello world");
 });
 app.use("/registerHospital",  require("./routes/registerHospital"));
-app.use("/authHospital", require("./routes/authHospital"));
+app.use("/Hospital_SignIn", require("./routes/authHospital"));
+app.use("/Doner_SignIn", require("./routes/authDoner"));
 
 app.use("/registerDoner",require("./routes/registerDoner"));  
+
+app.use('/refresh', require('./routes/refresh'));
+app.use('/donerRefresh', require('./routes/donerRefresh'));
+app.use('/donerLogout', require('./routes/donerLogout'));
+
+app.use(verifyJWT);
+app.use(donerVerifyJWT);
+
 
 mongoose.connection.once("open", () => {
   console.log("connected to mongodb");

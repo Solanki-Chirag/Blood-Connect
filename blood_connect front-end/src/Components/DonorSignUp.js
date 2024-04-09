@@ -18,6 +18,7 @@ import { SignUpSchema } from "../shemas";
 import Alert from "@mui/material/Alert";
 import { NavLink } from "react-router-dom";
 
+
 function Copyright(props) {
   return (
     <Typography
@@ -31,7 +32,7 @@ function Copyright(props) {
         Blood Connect
       </NavLink>
       {new Date().getFullYear()}
-      {"."}
+       
     </Typography>
   );
 }
@@ -63,7 +64,6 @@ export default function DonorSignUp() {
       initialValues: initialValues,
       validationSchema: SignUpSchema,
       onSubmit: async (value, action) => {
-        console.log("values", values);
         action.resetForm();
         setBloodGroup("");
 
@@ -79,7 +79,6 @@ export default function DonorSignUp() {
         try {
           const response = await fetch("http://localhost:3500/registerDoner", {
             method: "POST",
-
             body: formData,
           });
 

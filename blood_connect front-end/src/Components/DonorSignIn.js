@@ -5,7 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-
+import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -44,20 +44,51 @@ export default function DonorSignIn() {
     email: "",
     password: "",
   };
-
+  const [success, setsuccess] = React.useState(false);
   let { values, errors, handleBlur, handleChange, handleSubmit, touched } =
     useFormik({
       initialValues: initialValues,
       validationSchema: SignInSchema,
-      onSubmit: (value, action) => {
+      onSubmit: async (value, action) => {
         console.log(value);
         action.resetForm();
+        try {
+          const response = await fetch("http://localhost:3500/Doner_SignIn", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            body: JSON.stringify(values),
+          });
+          if (!response.ok) {
+            setsuccess(false); // Login unsuccessful
+            console.log("Login failed. Please check your credentials.");
+            return;
+          }
+          
+          setsuccess(true); // Login successful
+          const data = await response.json();
+
+          // Handle the response data as needed.
+          console.log(data);
+        } catch (error) {
+          console.error("Error submitting the form:", error);
+        }
       },
     });
 
+  
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
+      {success ? (
+        <Link to="/donerDashboard"/> 
+      ) : (
+        <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg--800 dark:text-red-400" role="alert">
+          <span className="font-medium">Danger alert!</span> Change a few things up and try submitting again.
+        </div>
+      )}
+        
+          
         <CssBaseline />
         <Box
           sx={{
@@ -80,7 +111,6 @@ export default function DonorSignIn() {
               id="email"
               label="Email Address"
               name="email"
-             
               value={values.name}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -117,12 +147,28 @@ export default function DonorSignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <NavLink to={"#"} variant="body2"  style={{ color: '#2196f3', textDecoration: "underline",fontSize:"14px" }}>
+                <NavLink
+                  to={"#"}
+                  variant="body2"
+                  style={{
+                    color: "#2196f3",
+                    textDecoration: "underline",
+                    fontSize: "14px",
+                  }}
+                >
                   Forgot password?
                 </NavLink>
               </Grid>
               <Grid item xs>
-                <NavLink to={"/DonorSignUp"} className="body2"  style={{ color: '#2196f3', textDecoration: "underline",fontSize:"14px" }}>
+                <NavLink
+                  to={"/DonorSignUp"}
+                  className="body2"
+                  style={{
+                    color: "#2196f3",
+                    textDecoration: "underline",
+                    fontSize: "14px",
+                  }}
+                >
                   Don't have an account? Sign Up
                 </NavLink>
               </Grid>

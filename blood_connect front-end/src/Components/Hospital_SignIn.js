@@ -49,9 +49,24 @@ export default function Hospital_SignIn() {
       useFormik({
         initialValues: initialValues,
         validationSchema: HosSignInSchema,
-        onSubmit: (value, action) => {
-          console.log(value);
+        onSubmit: async (value, action) => {
+          console.log(values);
           action.resetForm();
+          try {
+            const response = await fetch("http://localhost:3500/Hospital_SignIn", {
+              method: "POST",
+              headers:{'Content-Type':'application/json'},
+              credentials: 'include',
+              body:JSON.stringify(values),
+            });
+  
+            const data = await response.json();
+  
+            // Handle the response data as needed.
+            console.log(data);
+          } catch (error) {
+            console.error("Error submitting the form:", error);
+          }
         },
       });
   

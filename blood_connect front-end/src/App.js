@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import Doner_dashboard from "./Components/Doner_dashboard";
 import About from "./Components/About";
 import Contact from "./Components/Contact";
 import Blogs from "./Components/Blogs";
@@ -34,7 +34,11 @@ function App() {
             <Route path="DonorSignUp" element={<DonorSignUp />}></Route>
             <Route path="Hospital_SignIn" element={<Hospital_SignIn />}></Route>
             <Route path="Hospital_SignUp" element={<Hospital_SignUp />}></Route>
-            <Route path="Hospital_forgot_password" element={<Hospital_forgot_password />}></Route>
+            <Route
+              path="Hospital_forgot_password"
+              element={<Hospital_forgot_password />}
+            ></Route>
+            <Route path="donerDashboard" element={<Doner_dashboard />}></Route>
           </Route>
         </Routes>
       </BrowserRouter>
