@@ -9,7 +9,7 @@ const handleHospitalLogin = async (req, res) => {
     return res.status(400).json("Hospital id and password required!!");
 
   const findHospital = await hospital.findOne({ Hospital_id: Hospital_id });
-  if (!findHospital) return res.sendStatus(401);
+  if (!findHospital) return res.status(401);
 
   const match = await bcrypt.compare(password, findHospital.password);
 
@@ -44,7 +44,7 @@ const handleHospitalLogin = async (req, res) => {
 
     res.json({ accessToken });
   } else {
-    res.sendStatus(401);
+    return res.status(401);
   }
 };
 

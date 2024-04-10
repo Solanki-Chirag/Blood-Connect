@@ -5,7 +5,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -15,7 +14,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useFormik } from "formik";
 import { SignInSchema } from "../shemas";
 import Alert from "@mui/material/Alert";
-import { NavLink } from "react-router-dom";
+import { NavLink,useNavigate} from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -40,18 +39,23 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function DonorSignIn() {
+  const history=useNavigate();
+
+
   let initialValues = {
     email: "",
     password: "",
   };
   const [success, setsuccess] = React.useState(false);
+  const [submit, setsubmit] = React.useState(false);
   let { values, errors, handleBlur, handleChange, handleSubmit, touched } =
     useFormik({
       initialValues: initialValues,
       validationSchema: SignInSchema,
       onSubmit: async (value, action) => {
+        setsubmit(true);
         console.log(value);
-        action.resetForm();
+        action.resetForm(initialValues);
         try {
           const response = await fetch("http://localhost:3500/Doner_SignIn", {
             method: "POST",
@@ -65,7 +69,8 @@ export default function DonorSignIn() {
             return;
           }
           
-          setsuccess(true); // Login successful
+          setsuccess(true);
+          action.resetForm(initialValues); // Login successful
           const data = await response.json();
 
           // Handle the response data as needed.
@@ -80,13 +85,18 @@ export default function DonorSignIn() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
-      {success ? (
-        <Link to="/donerDashboard"/> 
-      ) : (
-        <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg--800 dark:text-red-400" role="alert">
-          <span className="font-medium">Danger alert!</span> Change a few things up and try submitting again.
-        </div>
+      {success && submit && (
+        history("/Doner_dashboard")
       )}
+      {(
+        !success && submit && (
+          <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg--800 dark:text-red-400" role="alert">
+             !Invalid Email and Password
+          </div>
+        )
+      )}
+       
+      
         
           
         <CssBaseline />
@@ -111,7 +121,7 @@ export default function DonorSignIn() {
               id="email"
               label="Email Address"
               name="email"
-              value={values.name}
+              value={values.email}
               onChange={handleChange}
               onBlur={handleBlur}
             />

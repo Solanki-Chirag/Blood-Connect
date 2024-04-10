@@ -26,7 +26,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.get("/", (req, res) => {
-  res.send("hello world");
+ // res.send("hello world");
 });
 app.use("/registerHospital",  require("./routes/registerHospital"));
 app.use("/Hospital_SignIn", require("./routes/authHospital"));
@@ -37,6 +37,11 @@ app.use("/registerDoner", require("./routes/registerDoner"));
 app.use("/forgot-password", require("./routes/Donorforgotpassword"));
 
 app.use("/reset-password", require("./routes/DonorResetPassword"));
+
+
+
+app.use(verifyJWT);
+app.use(donerVerifyJWT);
 
 mongoose.connection.once("open", () => {
   console.log("connected to mongodb");
