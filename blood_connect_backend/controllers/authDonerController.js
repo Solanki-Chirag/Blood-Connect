@@ -9,7 +9,7 @@ const handleDonerLogin = async (req, res) => {
     return res.status(400).json("doner id and password required!!");
 
   const findDoner = await doner.findOne({ email: email });
-  if (!findDoner) return res.sendStatus(401).json("Invalid email or password.");;
+  if (!findDoner) return res.status(401).json("Invalid email or password.");;
 
   const match = await bcrypt.compare(password, findDoner.password);
 
@@ -28,9 +28,9 @@ const handleDonerLogin = async (req, res) => {
     const refreshToken = jwt.sign(
       {
         email: Email,
-      },
+      },  
       process.env.REFRESH_TOKEN_SECRET,
-      { expiresIn: "1d" }
+      { expiresIn: "10d" }
     );
 
     findDoner.refreshToken = refreshToken;
@@ -45,7 +45,7 @@ const handleDonerLogin = async (req, res) => {
 
     res.json({ accessToken });
   } else {
-    res.sendStatus(401).json("Invalid email or password.");;
+   return res.status(401).json("Invalid email or password.");
   }
 };
 

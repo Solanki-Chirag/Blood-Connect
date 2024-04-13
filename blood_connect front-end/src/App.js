@@ -23,6 +23,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
+        <Route path="Doner_dashboard" element={<Doner_dashboard />}></Route>
           <Route path="/" element={<Home />}>
             <Route path="About" element={<About />}></Route>
             <Route path="Contact" element={<Contact />}></Route>
@@ -42,7 +43,7 @@ function App() {
               path="Hospital_forgot_password"
               element={<Hospital_forgot_password />}
             ></Route>
-            <Route path="donerDashboard" element={<Doner_dashboard />}></Route>
+            
           </Route>
           <Route path="hospitalDashboard" element={<hospitalDashboard />}></Route>
         </Routes>
