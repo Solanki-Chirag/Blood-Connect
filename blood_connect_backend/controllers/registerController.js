@@ -8,7 +8,7 @@ const handleNewHospital = async (req, res) => {
 
   // check for duplicate usernames in the db
   const duplicate = await hospital.findOne({ Hospital_id: Hospital_id }).exec();
-  if (duplicate) return res.sendStatus(409); //Conflict
+  if (duplicate) return res.status(409); //Conflict
 
   try {
     //encrypt the password

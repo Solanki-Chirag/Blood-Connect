@@ -5,7 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import { NavLink } from "react-router-dom";
+import { NavLink,useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -39,17 +39,20 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function Hospital_SignIn() {
-  
+  const history=useNavigate();
+
     let initialValues = {
       Hospital_id: "",
       password: "",
     };
-  
+    const [success, setsuccess] = React.useState(false);
+    const [submit, setsubmit] = React.useState(false);
     let { values, errors, handleBlur, handleChange, handleSubmit, touched } =
       useFormik({
         initialValues: initialValues,
         validationSchema: HosSignInSchema,
         onSubmit: async (value, action) => {
+          setsubmit(true);
           console.log(values);
           action.resetForm();
           try {
@@ -59,7 +62,14 @@ export default function Hospital_SignIn() {
               credentials: 'include',
               body:JSON.stringify(values),
             });
-  
+            if (!response.ok) {
+              setsuccess(false); // Login unsuccessful
+              console.log("Login failed. Please check your credentials.");
+              return;
+            }
+            
+            setsuccess(true);
+            action.resetForm(initialValues); // Login successful
             const data = await response.json();
   
             // Handle the response data as needed.
@@ -74,6 +84,16 @@ export default function Hospital_SignIn() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
+      {success && submit && (
+        history("/HospitalDashboard")
+      )}
+      {(
+        !success && submit && (
+          <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg--800 dark:text-red-400" role="alert">
+             !Invalid Hospital id or Password
+          </div>
+        )
+      )}
         <CssBaseline />
         <Box
           sx={{
