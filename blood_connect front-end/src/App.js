@@ -21,7 +21,7 @@ function App() {
   const [user, setUser] = useState("");
   return (
     <>
-      { <BrowserRouter>
+      <BrowserRouter>
         <Routes>
         <Route path="Doner_dashboard" element={<Doner_dashboard />}></Route>
         <Route path="HospitalDashboard" element={<HospitalDashboard/>}></Route>
@@ -48,8 +48,8 @@ function App() {
           </Route>
           <Route path="hospitalDashboard" element={<hospitalDashboard />}></Route>
         </Routes>
-      </BrowserRouter> }
-      
+      </BrowserRouter>
+      {/* <HospitalDashboard/> */}
     </>
   );
 }
