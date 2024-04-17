@@ -45,7 +45,7 @@ app.use("/sendRequest", require("./routes/sendRequest"));
 app.use("/registerCamp", require("./routes/registerCamp"));
 app.use("/loadRequest", require("./routes/loadRequest"));
 
-
+app.use("/acceptRequest",require("./routes/acceptRequest"))
 
 app.use(verifyJWT);
 app.use(donerVerifyJWT);

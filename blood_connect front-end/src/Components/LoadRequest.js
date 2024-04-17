@@ -29,6 +29,27 @@ const LoadRequest = () => {
     fetchRequests();
   }, []);
 
+  const handleAccept = async (requestData) => {
+    console.log("handle accept");
+    try {
+      const response = await fetch("http://localhost:3500/acceptRequest", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(requestData),
+        credentials: "include"
+      });
+      if (!response.ok) {
+        throw new Error("Failed to accept request");
+      }
+      console.log("Request accepted successfully");
+      // You can update the UI accordingly if needed
+    } catch (error) {
+      console.error("Error accepting request:", error);
+    }
+  };
+
   return (
     
     <div className="container">
@@ -54,7 +75,7 @@ const LoadRequest = () => {
                   Hospital Address: {request.hospitalAddress}
                 </Typography>
                 <div className="action-buttons">
-                  <Button variant="contained" color="success" className="accept-button">
+                  <Button onClick={() => handleAccept(request)} variant="contained" color="success" className="accept-button">
                     Accept
                   </Button>
                   <span style={{ marginRight: 8 }}></span>

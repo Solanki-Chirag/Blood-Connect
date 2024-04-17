@@ -1,5 +1,6 @@
 const request = require("../model/request");
 const hospital = require("../model/Hospital");
+const response = require('../model/response');
 const doner = require("../model/Doner");
 require('dotenv').config();
 
@@ -35,7 +36,6 @@ const loadRequest = async (req, res) => {
     try {
         const findDoner = await doner.findOne({ refreshToken: refreshToken });
     const requests = await request.find({ bloodType: findDoner.bloodGroup });
-    console.log(requests);
     return res.status(200).json(requests);
     }
     catch (err) {
@@ -43,5 +43,30 @@ const loadRequest = async (req, res) => {
     }
 
   };
-module.exports = { handleRequest,loadRequest };
+
+  const acceptRequest = async (req, res) => {
+    const cookies = req.cookies;
+      if (!cookies?.jwt)  res.status(204).json("empty cookie"); // No Content
+      const refreshToken = cookies.jwt;
+      const { patientId, patientName, hospitalId, hospitalName, lastDate } = req.body;
+      try {
+          const findDoner = await doner.findOne({ refreshToken: refreshToken });
+          const result = await response.create({
+            patientId:patientId,
+      patientName:patientName,
+      hospitalId:hospitalId,
+      hospitalName:hospitalName,
+      donorId:findDoner._id,
+      donorName:findDoner.firstName,
+      lastDate:lastDate
+          });
+          console.log(result);
+          res.status(201).json({ success: `response added` });
+      }
+      catch (err) {
+        // Handle error
+      }
+  
+    };
+module.exports = { handleRequest,loadRequest ,acceptRequest};
   
