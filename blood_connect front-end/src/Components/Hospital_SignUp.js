@@ -149,6 +149,21 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
+                  id="Hospital_address"
+                  label="Hospital Address"
+                  name="Hospital_address"
+                  value={values.Hospital_address}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.Hospital_address && touched.Hospital_address ? (
+                  <Alert severity="error">{errors.Hospital_address}</Alert>
+                ) : null}
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
                   id="contact"
                   label="Contact"
                   name="contact"

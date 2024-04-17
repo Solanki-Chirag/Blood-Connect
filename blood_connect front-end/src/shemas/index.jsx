@@ -40,6 +40,7 @@ const HosSignUpSchema = yup.object().shape({
     Hospital_name: yup.string().max(20).required("Enter Hospital name."),
     Hospital_id: yup.string().max(20).required("Enter Hospital id."),
     email: yup.string().matches(/^[a-zA-Z0-9._%+-]+@gmail\.com$/,"Enter valid email.").required("Enter email."),
+    Hospital_address: yup.string().required("Enter Hospital address."),
     contact: yup.string()
         .matches(/^\d{10}$/, "Invalid phone number")
         .required("Enter phone number."),
@@ -52,5 +53,18 @@ const HosSignUpSchema = yup.object().shape({
 });
 
 
+const PatientSchema = yup.object().shape({
+  patientName: yup.string().required("Patient name is required"),
+  patientId: yup.string().required("Patient ID is required"),
+  bloodType: yup.string().required("Blood type is required"),
+  hospitalName: yup.string().required("Hospital name is required"),
+  hospitalId: yup.string().required("Hospital ID is required"),
+  hospitalAddress: yup.string().required("Hospital address is required"),
+  lastDate: yup.date().required("Last date is required"),
+});
 
-export { SignInSchema, SignUpSchema,HosSignUpSchema,HosSignInSchema };
+
+
+
+
+export { SignInSchema, SignUpSchema,HosSignUpSchema,HosSignInSchema,PatientSchema };

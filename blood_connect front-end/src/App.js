@@ -16,6 +16,7 @@ import Hospital_forgot_password from "./Components/Hospital_forgot_password";
 import OrganizeCamp from "./Components/OrganizeCamp";
 import ChooseUserType from "./Components/ChooseUserType";
 import HospitalDashboard from "./Components/HospitalDashboard";
+import SendRequest from "./Components/SendRequest";
 
 function App() {
   const [user, setUser] = useState("");
@@ -25,6 +26,12 @@ function App() {
         <Routes>
         <Route path="Doner_dashboard" element={<Doner_dashboard />}></Route>
         <Route path="HospitalDashboard" element={<HospitalDashboard/>}></Route>
+        
+          <Route
+              path="sendRequest"
+              element={<SendRequest/>}
+            > 
+        </Route>
           <Route path="/" element={<Home />}>
             <Route path="About" element={<About />}></Route>
             <Route path="Contact" element={<Contact />}></Route>
@@ -40,16 +47,9 @@ function App() {
             <Route path="Hospital_SignUp" element={<Hospital_SignUp />}></Route>
             <Route path="Hospital_forgot_password" element={<Hospital_forgot_password />}></Route>
             
-            <Route
-              path="Hospital_forgot_password"
-              element={<Hospital_forgot_password />}
-            ></Route>
-            
           </Route>
-          <Route path="hospitalDashboard" element={<hospitalDashboard />}></Route>
         </Routes>
       </BrowserRouter>
-      {/* <HospitalDashboard/> */}
     </>
   );
 }

@@ -2,7 +2,7 @@ const hospital = require("../model/Hospital");
 const bcrypt = require("bcryptjs");
 
 const handleNewHospital = async (req, res) => {
-  const { Hospital_name, Hospital_id, email, contact, password } = req.body;
+  const { Hospital_name, Hospital_id, email,Hospital_address, contact, password } = req.body;
   if (!Hospital_name || !Hospital_id || !email || !contact || !password)
     return res.status(400).json({ message: "All fields are required" });
 
@@ -18,6 +18,7 @@ const handleNewHospital = async (req, res) => {
     const result = await hospital.create({
       Hospital_name: Hospital_name,
       Hospital_id: Hospital_id,
+      Hospital_address:Hospital_address,
       email: email,
       contact: contact,
       password: hashedPwd,

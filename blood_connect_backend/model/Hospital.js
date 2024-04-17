@@ -14,6 +14,10 @@ const hospitalSchema = new Schema({
     type: String,
     required: true,
   },
+  Hospital_address: {
+    type: String,
+    required: true,
+  },
   contact: {
     type: String,
     required: true,
