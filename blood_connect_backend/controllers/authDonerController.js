@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 
 const handleDonerLogin = async (req, res) => {
   const { email, password } = req.body;
-  console.log("back",req.body);
   if (!email || !password)
     return res.status(400).json("doner id and password required!!");
 
@@ -22,7 +21,7 @@ const handleDonerLogin = async (req, res) => {
         email: Email,
       },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "60s" }
+      { expiresIn: "5m" }
     );
 
     const refreshToken = jwt.sign(
@@ -38,8 +37,6 @@ const handleDonerLogin = async (req, res) => {
     console.log(result);
 
     res.cookie("jwt", refreshToken, {
-      httpOnly: true,
-      sameSite: 'None', 
       maxAge: 24 * 60 * 60 * 1000,
     });
 

@@ -41,6 +41,7 @@ app.use("/forgot-password", require("./routes/Donorforgotpassword"));
 app.use("/reset-password", require("./routes/DonorResetPassword"));
 
 app.use("/sendRequest", require("./routes/sendRequest"));
+app.use("/loadRequest", require("./routes/loadRequest"));
 
 
 

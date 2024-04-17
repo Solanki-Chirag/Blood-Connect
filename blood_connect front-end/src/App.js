@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./App.css";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Doner_dashboard from "./Components/Doner_dashboard";
 import About from "./Components/About";
 import Contact from "./Components/Contact";
 import Blogs from "./Components/Blogs";
@@ -15,9 +14,10 @@ import Hospital_SignUp from "./Components/Hospital_SignUp";
 import Hospital_forgot_password from "./Components/Hospital_forgot_password";
 import OrganizeCamp from "./Components/OrganizeCamp";
 import ChooseUserType from "./Components/ChooseUserType";
-import HospitalDashboard from "./Components/HospitalDashboard";
 import SendRequest from "./Components/SendRequest";
 import Hospital_Home from "./Components/Hospital_Home";
+import Doner_Home from "./Components/Doner_home";
+import LoadRequest from "./Components/LoadRequest";
 
 function App() {
   const [user, setUser] = useState("");
@@ -25,7 +25,9 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="Doner_dashboard" element={<Doner_dashboard />}></Route>
+          <Route path="Doner_dashboard" element={<Doner_Home/>}>
+          <Route path="LoadRequest" element={<LoadRequest/>}></Route>
+          </Route>
           <Route path="HospitalDashboard" element={<Hospital_Home />}>
             <Route path="sendRequest" element={<SendRequest />}></Route>
           </Route>
