@@ -21,7 +21,7 @@ const handleHospitalLogin = async (req, res) => {
         Hospital_name: hospital_name,
       },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "60s" }
+      { expiresIn: "5m" }
     );
 
     const refreshToken = jwt.sign(
@@ -37,8 +37,6 @@ const handleHospitalLogin = async (req, res) => {
     console.log(result);
 
     res.cookie("jwt", refreshToken, {
-      httpOnly: true,
-      sameSite: 'None', 
       maxAge: 24 * 60 * 60 * 1000,
     });
 

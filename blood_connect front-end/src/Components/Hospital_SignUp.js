@@ -41,6 +41,7 @@ export default function SignUp() {
 
   let initialValues = {
     Hospital_name: "",
+    Hospital_address: "",
     Hospital_id: "",
     email: "",
     contact: "",
@@ -152,6 +153,7 @@ export default function SignUp() {
                   id="Hospital_address"
                   label="Hospital Address"
                   name="Hospital_address"
+                  autoComplete="Hospital_address"
                   value={values.Hospital_address}
                   onChange={handleChange}
                   onBlur={handleBlur}

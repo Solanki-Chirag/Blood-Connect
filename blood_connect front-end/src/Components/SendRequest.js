@@ -40,9 +40,6 @@ export default function SendRequest() {
     patientName: "",
     patientId: "",
     bloodType: "",
-    hospitalName: "",
-    hospitalId: "",
-    hospitalAddress: "",
     lastDate: "",
   };
 
@@ -139,56 +136,10 @@ export default function SendRequest() {
               <Alert severity="error">{errors.bloodType}</Alert>
             ) : null}
 
-            <TextField
-              margin="normal"
-              fullWidth
-              name="hospitalName"
-              label="Hospital Name"
-              type="text"
-              id="hospitalName"
-              value={values.hospitalName}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-            {errors.hospitalName && touched.hospitalName ? (
-              <Alert severity="error">{errors.hospitalName}</Alert>
-            ) : null}
-
-            <TextField
-              margin="normal"
-              fullWidth
-              name="hospitalId"
-              label="Hospital ID"
-              type="text"
-              id="hospitalId"
-              value={values.hospitalId}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-            {errors.hospitalId && touched.hospitalId ? (
-              <Alert severity="error">{errors.hospitalId}</Alert>
-            ) : null}
-
-            <TextField
-              margin="normal"
-              fullWidth
-              name="hospitalAddress"
-              label="Hospital Address"
-              type="text"
-              id="hospitalAddress"
-              value={values.hospitalAddress}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-            {errors.hospitalAddress && touched.hospitalAddress ? (
-              <Alert severity="error">{errors.hospitalAddress}</Alert>
-            ) : null}
-
-            <TextField
+           <TextField
               margin="normal"
               fullWidth
               name="lastDate"
-              label="Last Date"
               type="date"
               id="lastDate"
               value={values.lastDate}

@@ -5,13 +5,10 @@ require('dotenv').config();
 const handleRequest = async (req, res) => {
 
     const cookies = req.cookies;
-    if (!cookies?.jwt) return res.sendStatus(204); // No Content
+    if (!cookies?.jwt)  res.status(204).json("empty cookie"); // No Content
     const refreshToken = cookies.jwt;
-
     try {
-
         const findHospital = await hospital.findOne({ refreshToken: refreshToken });
-
          await request.create({
           patientName: req.body.patientName,
           patientId:req.body.patientId,

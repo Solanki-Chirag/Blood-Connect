@@ -21,6 +21,8 @@ app.set("view engine", "ejs");
 // // and fetch cookies credentials requirement
  app.use(credentials);
 
+ app.use(cookieParser());
+
 app.use(cors(corsOptions));
 
 app.use(express.json());

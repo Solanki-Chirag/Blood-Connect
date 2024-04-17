@@ -30,6 +30,9 @@ const donerSchema = new Schema({
     type:String,
     required:true
   },
+  address:{
+    type:String
+  },
   refreshToken: String,
 });
 

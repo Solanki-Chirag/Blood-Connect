@@ -57,9 +57,6 @@ const PatientSchema = yup.object().shape({
   patientName: yup.string().required("Patient name is required"),
   patientId: yup.string().required("Patient ID is required"),
   bloodType: yup.string().required("Blood type is required"),
-  hospitalName: yup.string().required("Hospital name is required"),
-  hospitalId: yup.string().required("Hospital ID is required"),
-  hospitalAddress: yup.string().required("Hospital address is required"),
   lastDate: yup.date().required("Last date is required"),
 });
 
