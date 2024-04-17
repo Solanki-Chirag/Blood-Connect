@@ -30,6 +30,7 @@ function App() {
           </Route>
           <Route path="HospitalDashboard" element={<Hospital_Home />}>
             <Route path="sendRequest" element={<SendRequest />}></Route>
+            <Route path="organizeCamp" element={<Hospital_OrganizeCamp />}></Route>
           </Route>
           <Route path="/" element={<Home />}>
             <Route path="About" element={<About />}></Route>
