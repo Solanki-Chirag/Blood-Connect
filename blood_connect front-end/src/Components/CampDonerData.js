@@ -9,30 +9,30 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useFormik } from "formik";
-import {  CampSchema } from "../shemas"; // Assuming you have a schema for patient request data
+import {  CampDataSchema } from "../shemas"; // Assuming you have a schema for patient request data
 import Alert from "@mui/material/Alert";
 
 
 const defaultTheme = createTheme();
 
-export default function Hospital_OrganizeCamp() {
+export default function CampDonerData() {
 
 
   let initialValues = {
-    CampAddress: "",
-    CampDays: "",
-    CampDate: "",
+    CampId: "",
+    Email: "",
+    Liters: "",
   };
 
   let { values, errors, handleBlur, handleChange, handleSubmit, touched } =
     useFormik({
       initialValues: initialValues,
-      validationSchema: CampSchema, 
+      validationSchema: CampDataSchema, 
       onSubmit: async (values, action) => {
         console.log(values);
         action.resetForm(initialValues);
         try {
-          await fetch("http://localhost:3500/registerCamp", {
+          await fetch("http://localhost:3500/registerCampDonor", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",
@@ -41,7 +41,7 @@ export default function Hospital_OrganizeCamp() {
 
           action.resetForm(initialValues); // Submission successful
           
-            if(Response.ok){console.log("Camp register")}
+            if(Response.ok){console.log("Donor Camp register")}
         } catch (error) {
           console.error("Error submitting the form:", error);
         }
@@ -64,50 +64,51 @@ export default function Hospital_OrganizeCamp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Camp Register Form
+            Donor Register Form
           </Typography>
           <Box component="form" onSubmit={handleSubmit} Validate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               fullWidth
-              name="CampAddress"
-              label="Camp Address"
+              name="CampId"
+              label="Camp Id"
               type="text"
-              id="CampAddress"
-              value={values.CampAddress}
+              id="CampId"
+              value={values.CampId}
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            {errors.CampAddress && touched.CampAddress ? (
-              <Alert severity="error">{errors.CampAddress}</Alert>
+            {errors.CampId && touched.CampId ? (
+              <Alert severity="error">{errors.CampId}</Alert>
             ) : null}
             <TextField
               margin="normal"
               fullWidth
-              name="CampDays"
-              label="Camp Days"
+              name="Email"
+              label="Email"
               type="text"
-              id="CampDays"
-              value={values.CampDays}
+              id="Email"
+              value={values.Email}
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            {errors.CampDays && touched.CampDays ? (
-              <Alert severity="error">{errors.CampDays}</Alert>
+            {errors.Email && touched.Email ? (
+              <Alert severity="error">{errors.Email}</Alert>
             ) : null}
 
             <TextField
               margin="normal"
               fullWidth
-              name="CampDate"
-              type="date"
-              id="CampDate"
-              value={values.CampDate}
+              name="Liters"
+              type="text"
+              label="Liters"
+              id="Liters"
+              value={values.Liters}
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            {errors.CampDate && touched.CampDate ? (
-              <Alert severity="error">{errors.CampDate}</Alert>
+            {errors.Liters && touched.Liters ? (
+              <Alert severity="error">{errors.Liters}</Alert>
             ) : null}
 
             <Button

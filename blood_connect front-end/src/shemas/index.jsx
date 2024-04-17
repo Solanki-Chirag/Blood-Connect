@@ -67,8 +67,15 @@ const CampSchema = yup.object().shape({
     
   });
 
+  const CampDataSchema = yup.object().shape({
+    CampId: yup.string().required("Enter Camp Id."),
+    Email: yup.string().matches(/^[a-zA-Z0-9._%+-]+@gmail\.com$/,"Enter valid email.").required("Enter email."),
+    Liters:  yup.date().required("Amount is required"),
+    
+  });
 
 
 
 
-export { SignInSchema, SignUpSchema,HosSignUpSchema,HosSignInSchema,PatientSchema,CampSchema };
+
+export { SignInSchema, SignUpSchema,HosSignUpSchema,HosSignInSchema,PatientSchema,CampSchema,CampDataSchema };
