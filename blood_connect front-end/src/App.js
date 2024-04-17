@@ -18,6 +18,7 @@ import SendRequest from "./Components/SendRequest";
 import Hospital_Home from "./Components/Hospital_Home";
 import Doner_Home from "./Components/Doner_home";
 import LoadRequest from "./Components/LoadRequest";
+import Hospital_OrganizeCamp from "./Components/Hospital_OrganizeCamp";
 
 function App() {
   const [user, setUser] = useState("");
@@ -30,7 +31,7 @@ function App() {
           </Route>
           <Route path="HospitalDashboard" element={<Hospital_Home />}>
             <Route path="sendRequest" element={<SendRequest />}></Route>
-            <Route path="organizeCamp" element={<Hospital_OrganizeCamp />}></Route>
+            <Route path="organizeCamp" element={<Hospital_OrganizeCamp/>}></Route>
           </Route>
           <Route path="/" element={<Home />}>
             <Route path="About" element={<About />}></Route>
