@@ -60,8 +60,15 @@ const PatientSchema = yup.object().shape({
   lastDate: yup.date().required("Last date is required"),
 });
 
+const CampSchema = yup.object().shape({
+    CampAddress: yup.string().required("Enter Camp address."),
+    CampDays: yup.string().required("Enter Camp Days"),
+    CampDate:  yup.date().required("Camp date is required"),
+    
+  });
 
 
 
 
-export { SignInSchema, SignUpSchema,HosSignUpSchema,HosSignInSchema,PatientSchema };
+
+export { SignInSchema, SignUpSchema,HosSignUpSchema,HosSignInSchema,PatientSchema,CampSchema };

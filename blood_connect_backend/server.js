@@ -9,10 +9,11 @@ const donerVerifyJWT = require('./middleware/donerVerifyJwt');
 const cookieParser = require('cookie-parser');
 const credentials = require('./middleware/credentials');
 const connectDB = require("./config/dbConn");
+const { EventEmitter } = require('events');
 PORT = 3500;
 
 connectDB();
-
+EventEmitter.defaultMaxListeners = 15;
 app.set("view engine", "ejs");
 // // custom middleware logger
 // app.use(logger);
@@ -41,6 +42,7 @@ app.use("/forgot-password", require("./routes/Donorforgotpassword"));
 app.use("/reset-password", require("./routes/DonorResetPassword"));
 
 app.use("/sendRequest", require("./routes/sendRequest"));
+app.use("/RegisterCamp", require("./routes/registerCamp"));
 
 
 

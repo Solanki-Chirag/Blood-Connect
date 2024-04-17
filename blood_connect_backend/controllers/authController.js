@@ -21,7 +21,7 @@ const handleHospitalLogin = async (req, res) => {
         Hospital_name: hospital_name,
       },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "5m" }
+      { expiresIn: "50m" }
     );
 
     const refreshToken = jwt.sign(
