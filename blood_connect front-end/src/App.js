@@ -21,6 +21,8 @@ import LoadRequest from "./Components/LoadRequest";
 import Hospital_OrganizeCamp from "./Components/Hospital_OrganizeCamp";
 import CampAddDoner from "./Components/CampAddDoner";
 import CampDonerData from "./Components/CampDonerData";
+import Certificate from "./Components/Certificate";
+import DownloadCerti from "./Components/DownloadCerti";
 
 function App() {
   const [user, setUser] = useState("");
@@ -28,8 +30,10 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
+         <Route path="DownloadCerti" element={<DownloadCerti/>}></Route>
           <Route path="Doner_dashboard" element={<Doner_Home/>}>
           <Route path="LoadRequest" element={<LoadRequest/>}></Route>
+          <Route path="Certificate" element={<Certificate/>}></Route>
           </Route>
           <Route path="HospitalDashboard" element={<Hospital_Home />}>
             <Route path="sendRequest" element={<SendRequest />}></Route>

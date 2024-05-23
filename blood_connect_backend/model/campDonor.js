@@ -5,6 +5,14 @@ const campSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  CampDate: {
+    type: String,
+    required: true,
+  },
+  HospitalName: {
+    type: String,
+    required: true,
+  },
   Email: {
     type: String,
     required: true,
@@ -12,6 +20,9 @@ const campSchema = new mongoose.Schema({
   Liters: {
     type: String,
     required: true,
+  },
+  certificate:{
+    type:String,
   },
 });
 
