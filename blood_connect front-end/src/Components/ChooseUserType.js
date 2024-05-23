@@ -64,6 +64,7 @@ export default function ChooseUserType({ user, setUser }) {
                   control={<Radio color="secondary" />}
                   label="Hospital"
                 />
+               
               </RadioGroup>
             </FormControl>
           </Grid>

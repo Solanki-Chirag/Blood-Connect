@@ -8,7 +8,7 @@ const handleForgotPassword = async (req, res) => {
   try {
     const oldUser = await donor.findOne({ email });
     if (!oldUser) {
-      return res.json("donor not exists!!");
+      return res.status(401).json("donor not exists!!");
     }
 
     const secret = process.env.ACCESS_TOKEN_SECRET + oldUser.password;
