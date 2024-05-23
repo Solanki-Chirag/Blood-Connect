@@ -37,9 +37,38 @@ const loadRequest = async (req, res) => {
     try {
         const findDoner = await doner.findOne({ refreshToken: refreshToken });
     const requests = await request.find({ bloodType: findDoner.bloodGroup });
-    console.log(requests);
 
-    return res.status(200).json(requests);
+    const filteredRequests = [];
+    const donorLat = findDoner.latitude;
+    const donorLon = findDoner.longitude;
+      
+    for (const req of requests) {
+      const hospitalId = req.hospitalId;
+
+      const findHospital = await hospital.findOne({ Hospital_id: hospitalId });
+
+      const hospitalLat = findHospital.latitude;
+      const hospitalLon = findHospital.longitude;
+
+
+      const url = `https://geocodeapi.p.rapidapi.com/GetDistance?lat1=${donorLat}&lon1=${donorLon}&lat2=${hospitalLat}&lon2=${hospitalLon}`;
+      const options = {
+        method: 'GET',
+        headers: {
+          'X-RapidAPI-Key': 'ea2fdf51a9msh07a632cb92ed185p16fcdejsn540dd31b9f3d',
+          'X-RapidAPI-Host': 'geocodeapi.p.rapidapi.com'
+        }
+      };
+
+      const response = await fetch(url, options);
+      const result = await response.json();
+      
+      if (result.DistanceInKm <= 10) {
+        filteredRequests.push(req);
+      }
+    }
+    
+    return res.status(200).json(filteredRequests);
     }
     catch (err) {
       // Handle error

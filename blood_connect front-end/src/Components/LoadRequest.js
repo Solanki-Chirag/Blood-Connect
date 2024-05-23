@@ -19,7 +19,7 @@ const LoadRequest = () => {
           throw new Error("Failed to fetch requests");
         }
         const data = await response.json();
-        console.log(data); // Check the response data in the console
+        // console.log(data); // Check the response data in the console
         setRequests(data);
       } catch (error) {
         console.error("Error fetching requests:", error);
