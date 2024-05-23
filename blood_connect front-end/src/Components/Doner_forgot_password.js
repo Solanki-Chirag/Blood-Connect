@@ -38,10 +38,10 @@ export default function Hospital_forgot_password({ setLogin }) {
 
     const email = data.get('Email'); 
   try {
-    const response = await fetch('http://localhost:3500/hospital-forgot-password', {
-      method: 'POST',
+    const response = await fetch("http://localhost:3500/forgot-password", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ email: email }),
     });

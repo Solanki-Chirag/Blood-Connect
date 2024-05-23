@@ -8,6 +8,7 @@ import Blogs from "./Components/Blogs";
 import Home from "./Components/Home";
 import DonorSignIn from "./Components/DonorSignIn";
 import DonorSignUp from "./Components/DonorSignUp";
+import Doner_forgot_password from "./Components/Doner_forgot_password";
 import Hospital_SignIn from "./Components/Hospital_SignIn";
 import Hospital_SignUp from "./Components/Hospital_SignUp";
 
@@ -53,6 +54,10 @@ function App() {
             <Route
               path="Hospital_forgot_password"
               element={<Hospital_forgot_password />}
+            ></Route>
+            <Route
+              path="Doner_forgot_password"
+              element={<Doner_forgot_password />}
             ></Route>
           </Route>
         </Routes>

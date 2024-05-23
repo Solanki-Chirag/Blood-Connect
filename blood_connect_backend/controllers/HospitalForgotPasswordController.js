@@ -8,7 +8,7 @@ const handleForgotPassword = async (req, res) => {
   try {
     const oldUser = await hospital.findOne({ email });
     if (!oldUser) {
-      return res.status(401).json("donor not exists!!");
+      return res.status(401).json("hospital not exists!!");
     }
 
     const secret = process.env.ACCESS_TOKEN_SECRET + oldUser.password;
