@@ -5,14 +5,14 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { NavLink } from 'react-router-dom'
 
-const CampAddDoner = () => {
+const Certificate = () => {
   const [requests, setRequests] = useState([]);
 
   useEffect(() => {
     // Fetch donor's requests from the backend
     const fetchRequests = async () => {
       try {
-        const response = await fetch("http://localhost:3500/loadCamps", {
+        const response = await fetch("http://localhost:3500/getCerti", {
           method: "GET",
           credentials: "include"
         });
@@ -43,19 +43,19 @@ const CampAddDoner = () => {
             <Card variant="outlined" sx={{ minWidth: 275, marginBottom: 2 }}>
               <CardContent>
                 <Typography variant="h5" component="div">
-                  {request.CampId}
+                  {request.HospitalName}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Camp Address: {request.CampAddress}
+                  Camp Id: {request.CampId}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
                   Camp Date: {request.CampDate}
                 </Typography>
 
                 <div className="action-buttons">
-                <NavLink to="/HospitalDashboard/AddDoners">
+                <NavLink to="/DownloadCerti">
                 <Button variant="contained" color="success" className="accept-button">
-                  Add Doners
+                  Get Certificate
                 </Button>
               </NavLink>
 
@@ -71,4 +71,4 @@ const CampAddDoner = () => {
   );
 };
 
-export default CampAddDoner;
+export default Certificate;

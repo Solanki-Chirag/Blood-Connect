@@ -41,15 +41,18 @@ app.use("/forgot-password", require("./routes/Donorforgotpassword"));
 
 app.use("/reset-password", require("./routes/DonorResetPassword"));
 
-app.use("/hospital-forgot-password", require("./routes/Hospitalforgotpassword"));
+// app.use("/hospital-forgot-password", require("./routes/Hospitalforgotpassword"));
 
-app.use("/hospital-reset-password", require("./routes/HospitalResetPassword"));
+// app.use("/hospital-reset-password", require("./routes/HospitalResetPassword"));
 
 app.use("/sendRequest", require("./routes/sendRequest"));
 app.use("/registerCamp", require("./routes/registerCamp"));
 app.use("/loadRequest", require("./routes/loadRequest"));
 app.use("/loadCamps", require("./routes/loadCamps"));
 app.use("/registerCampDonor", require("./routes/registerCampDonor"));
+app.use("/getCerti", require("./routes/getCerti"));
+app.use("/getCertiData", require("./routes/getCertiData"));
+
 
 app.use("/acceptRequest",require("./routes/acceptRequest"))
 

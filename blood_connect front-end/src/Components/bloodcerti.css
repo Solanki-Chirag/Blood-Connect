@@ -1,0 +1,74 @@
+
+
+.certificate-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
+}
+
+.certificate {
+  background-color: white;
+  border: 10px solid red;
+  padding: 40px;
+  width: 800px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.ribbon {
+  position: absolute;
+  top: -30px;
+  left: calc(50% - 150px);
+  width: 300px;
+  height: 60px;
+  background: red;
+  color: white;
+  line-height: 60px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.ribbon-text {
+  position: relative;
+}
+
+.certificate h1 {
+  font-size: 36px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.certificate p {
+  font-size: 18px;
+  color: #555;
+  margin: 10px 0;
+}
+
+.certificate h2 {
+  font-size: 24px;
+  color: red;
+  margin: 10px 0;
+}
+
+.download-button {
+  background-color: red;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  font-size: 16px;
+  margin: 4px auto;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.download-button:hover {
+  background-color: rgb(236, 109, 109);
+}
