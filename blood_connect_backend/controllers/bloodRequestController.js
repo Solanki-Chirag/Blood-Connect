@@ -29,6 +29,7 @@ const handleRequest = async (req, res) => {
       }
 };
 
+
 const loadRequest = async (req, res) => {
   const cookies = req.cookies;
     if (!cookies?.jwt)  res.status(204).json("empty cookie"); // No Content
@@ -36,6 +37,8 @@ const loadRequest = async (req, res) => {
     try {
         const findDoner = await doner.findOne({ refreshToken: refreshToken });
     const requests = await request.find({ bloodType: findDoner.bloodGroup });
+    console.log(requests);
+
     return res.status(200).json(requests);
     }
     catch (err) {

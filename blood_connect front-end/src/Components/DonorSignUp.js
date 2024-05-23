@@ -57,6 +57,7 @@ export default function DonorSignUp() {
     contact: "",
     bloodGroup: "",
     password: "",
+    address:""
   };
 
   let { values, errors, handleBlur, handleChange, handleSubmit, touched } =
@@ -72,6 +73,7 @@ export default function DonorSignUp() {
         formData.append("lastName", values.lastName);
         formData.append("email", values.email);
         formData.append("contact", values.contact);
+        formData.append("address", values.address);
         formData.append("bloodGroup", values.bloodGroup);
         formData.append("password", values.password);
         formData.append("file", file);
@@ -155,6 +157,19 @@ export default function DonorSignUp() {
                   <Alert severity="error">{errors.lastName}</Alert>
                 ) : null}
               </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="address"
+                  label="address"
+                  name="address"
+                  autoComplete="address"
+                  value={values.address}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                </Grid>
               <Grid item xs={12}>
                 <TextField
                   required

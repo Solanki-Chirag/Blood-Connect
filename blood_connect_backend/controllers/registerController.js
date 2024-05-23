@@ -14,17 +14,37 @@ const handleNewHospital = async (req, res) => {
     //encrypt the password
     const hashedPwd = await bcrypt.hash(password, 10);
 
+    const url = `https://trueway-geocoding.p.rapidapi.com/Geocode?address=${Hospital_address}&language=en`;
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': 'ea2fdf51a9msh07a632cb92ed185p16fcdejsn540dd31b9f3d',
+		'X-RapidAPI-Host': 'trueway-geocoding.p.rapidapi.com'
+	}
+};
+
+
+	const response = await fetch(url, options);
+	const result = await response.json();
+	const location = result.results[0].location;
+  console.log(location);
+      const lat = location.lat;
+      const lng = location.lng;
+
+
     //create and store the new user
-    const result = await hospital.create({
+    const result1 = await hospital.create({
       Hospital_name: Hospital_name,
       Hospital_id: Hospital_id,
       Hospital_address:Hospital_address,
       email: email,
       contact: contact,
       password: hashedPwd,
+      latitude: lat,
+      longitude: lng
     });
 
-    console.log(result);
+    console.log(result1);
 
     res.status(201).json({ success: `New hospital ${Hospital_name} created!` });
   } catch (err) {

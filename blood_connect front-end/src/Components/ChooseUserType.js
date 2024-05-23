@@ -64,11 +64,6 @@ export default function ChooseUserType({ user, setUser }) {
                   control={<Radio color="secondary" />}
                   label="Hospital"
                 />
-                <FormControlLabel
-                  value="Admin"
-                  control={<Radio color="success" />}
-                  label="Admin"
-                />
               </RadioGroup>
             </FormControl>
           </Grid>

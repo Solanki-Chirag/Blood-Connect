@@ -33,7 +33,15 @@ const donerSchema = new Schema({
   address:{
     type:String
   },
+  latitude: {
+    type: Number, 
+
+  },
+  longitude: {
+    type: Number,
+
+  },
   refreshToken: String,
 });
 
-module.exports=mongoose.model("doner",donerSchema); 
+module.exports = mongoose.model("doner", donerSchema);

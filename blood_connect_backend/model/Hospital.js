@@ -26,6 +26,14 @@ const hospitalSchema = new Schema({
     type: String,
     required: true,
   },
+  latitude: {
+    type: Number, // Assuming latitude is a number
+    required: true, // Or whichever validation you need
+  },
+  longitude: {
+    type: Number, // Assuming longitude is a number
+    required: true, // Or whichever validation you need
+  },
   refreshToken: String,
 });
 
