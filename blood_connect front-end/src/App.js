@@ -24,6 +24,7 @@ import CampAddDoner from "./Components/CampAddDoner";
 import CampDonerData from "./Components/CampDonerData";
 import Certificate from "./Components/Certificate";
 import DownloadCerti from "./Components/DownloadCerti";
+import LoadResponses from "./Components/LoadResponses";
 
 function App() {
   const [user, setUser] = useState("");
@@ -41,6 +42,7 @@ function App() {
             <Route path="organizeCamp" element={<Hospital_OrganizeCamp/>}></Route>
             <Route path="campAddDoner" element={<CampAddDoner/>}></Route>
             <Route path="AddDoners" element={<CampDonerData/>}></Route>
+            <Route path="LoadResponses" element={<LoadResponses/>}></Route>
           </Route>
           <Route path="/" element={<Home />}>
             <Route path="About" element={<About />}></Route>
